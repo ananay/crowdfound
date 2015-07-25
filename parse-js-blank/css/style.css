@@ -1,0 +1,45 @@
+@font-face
+{
+  font-family: din;
+  src:url("../fonts/DIN.ttf");
+}
+
+body {
+  margin:0 auto;
+}
+
+div.images {
+  display:block;
+  margin:0 auto;
+  padding:0;
+  position: relative;
+  height:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+.images img {
+  height: auto;
+  max-width:100%;
+  }
+
+.images .day {
+  position:absolute;
+}
+
+.images .day i {
+  color:white;
+  z-index:500;
+  position:absolute;
+  cursor:pointer;
+}
+
+.images .day i#icon1 {
+  top:60%;
+  left:1%;
+}
+
+.images .day i#icon2 {
+  top:60%;
+  left:27%;
+}
