@@ -1,0 +1,46 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>My Parse App</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+  <script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+</head>
+
+<body>
+  
+  <div id="main">
+  <div style="display:none" class="success">
+      <p>We've also just created your first object using the following code:</p>
+      
+        <code>
+          	var TestObject = Parse.Object.extend("items");
+    		var testObject = new TestObject();
+      		testObject.save({name: "keys",status: true});
+        </code>
+    </div>
+    
+  </div>
+
+  <script type="text/javascript">
+    Parse.initialize("e9xwauybyOdn6Bv4WvDoVvubHW2I6doSzV7Cd9wa", "r0IwC7zAiETyKHUmMRi8wGxyqkd3lNilUuTSnkSq");
+    
+    var TestObject = Parse.Object.extend("items");
+    var testObject = new TestObject();
+      testObject.save({name: "keys",status: true}, {
+      success: function(object) {
+        $(".success").show();
+      },
+      error: function(model, error) {
+        $(".error").show();
+      }
+    });
+  </script>
+</body>
+
+</html>
