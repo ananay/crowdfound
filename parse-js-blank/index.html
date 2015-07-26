@@ -2,8 +2,8 @@
 <head>
   <meta charset="utf-8">
 
-  <title>My Parse App</title>
-  <meta name="description" content="My Parse App">
+  <title>CrowdFound</title>
+  <meta name="description" content="CrowdFound">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/stylesDefault.css">
@@ -17,13 +17,58 @@
 <script src="js/_dependent/greensock/TweenMax.min.js"></script>
 <script src="js/jquery.scrollmagic.min.js"></script>
 <script src="js/jquery.scrollmagic.debug.js"></script>
+<script type="text/javascript">
+    function changeImage(element,objectIdNeeded,boolNow) {
+        element.src = element.bln ? "assets/tick.png" : "assets/cross.png";
+        element.bln = !element.bln;  /* assigns opposite boolean value always */
+
+        console.log(objectIdNeeded);
+        var TestObject = Parse.Object.extend("items");
+
+        var query = new Parse.Query(TestObject);
+        query.equalTo("objectId", objectIdNeeded);
+        console.log(objectIdNeeded);
+        query.first({
+            success: function (TestObject) {
+                TestObject.save(null, {
+                    success: function (testRow) {
+
+                       // contact.set("FirstName", NewFname.value);
+                       // contact.set("LastName", NewLname.value);
+                        testRow.set("status") = !boolNow;
+
+                        testRow.save();
+                        //location.reload();
+                    }
+                });
+
+            }
+        });
+
+                    
+
+        // Parse.initialize("e9xwauybyOdn6Bv4WvDoVvubHW2I6doSzV7Cd9wa", "r0IwC7zAiETyKHUmMRi8wGxyqkd3lNilUuTSnkSq");
+
+        // var TestObject = Parse.Object.extend("items");
+        // var testObject = new TestObject();
+        // console.log("rowToBeUpdated");
+    
+        // testObject.save(null, {
+        //     success: function(testObject) {
+        // // Now let's update it with some new data. In this case, only cheatMode and score
+        // // will get sent to the cloud. playerName hasn't changed.
+        //     testObject.set("name") = rowToBeUpdated.get("name");
+        //     testObject.set("status") = !rowToBeUpdated.get("status");
+        //     testObject.save();
+        // }
+        // });
+    }
+ </script>
 <link rel="stylesheet" href="js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
   <div id="main">
   <div class="success">
-      <p>We've also just created your first object using the following code:</p>
-      
         <!-- <code>
             var TestObject = Parse.Object.extend("items");
         var testObject = new TestObject();
@@ -32,11 +77,9 @@
 
         <table id="eventTable">
       <tr>
-        <th><i class="fa fa-arrow-left" id="iconBack"></i>Event Name</th>
-        <th>Venue</th>
-        <th>Event Type</th>
-        <th>Starts</th>
-        <th>Ends</th>
+        <th><i class="fa fa-arrow-left" id="iconBack"></i>Name</th>
+        <th>Status</th>
+        <th>Where is it?</th>
       </tr>
     </table>
 
@@ -58,10 +101,48 @@
         // Do something with the returned Parse.Object values
         for (var i = 0; i < results.length; i++) {
             // alert("Successfully retrieved " + results.length + " scores.");
+            //var defaultLocation = results[0].get("Location");
+            var iskiLocation = results[i].get("Location");
+
+            //var distance = Parse.kilometersTo(iskiLocation)
+
+            var found = results[i].get("status");
+            var imageToDisplay = found ? "assets/tick.png" : "assets/cross.png";
+           // var stringToDisplay = found ? "Safely at home" : "Last seen ";
+
+            $.ajax({
+                type: 'GET',
+                url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+iskiLocation.latitude+","+iskiLocation.longitude,
+                dataType: 'json',
+                success: function(e) { //console.log(e);
+                    if (e.status=="OK"){
+                        var address = e.results[0].formatted_address;
+                    }
+                    else{
+                        var address = "Your "+results[i].get("name")+" is in the middle of nowhere! :("
+                    }
+                    
+                    //console.log(address);
+                    var myRow="<tr><td><a class=\"fancybox\" data-fancybox-type=\"iframe\" href=\"/demo/iframe.html\">"+results[i].get("name")+"</a></td><td><img src="+imageToDisplay+" id=\"changer\" onclick=\"changeImage(this,"+results[i].get("objectId")+","+results[i].get("status")+")\" /></td><td>"+address+"</td>";
+                    //console.log(myRow);
+                    $("#eventTable tr:last").after(myRow);},
+                data: {},
+                async: false
+            });
+
+            // $.getJSON("http://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838", function(e){
+            //     console.log(e);
+            //     var address = e.results[0].formatted_address;
+            //     console.log(address);
+            //     var myRow="<tr><td><a class=\"fancybox\" data-fancybox-type=\"iframe\" href=\"/demo/iframe.html\">"+results[i].get("name")+"</a></td><td><img src="+imageToDisplay+" id=\"changer\" onclick=\"changeImage(this)\" /></td><td>"+s+"</td>";
+            //     console.log(myRow);
+            //     $("#eventTable tr:last").after(myRow);
+
+            // })
 
             //Display the received items in a table 
-            var myRow="<tr><td><a class=\"fancybox\" data-fancybox-type=\"iframe\" href=\"/demo/iframe.html\">"+results[i].get("name")+"</a></td><td>"+results[i].get("status")+"</td><td>1100</td><td>1330</td></tr>"
-            $("#eventTable tr:last").after(myRow);
+            
+
         }
       },
       error: function(error) {
