@@ -43,3 +43,44 @@ body {
     width: 40px;
     height: 40px;
 }
+
+/*#eventTable {
+  position:relative;
+  left:32%;
+  top:7%;
+  z-index:-1;
+  font-family:din;
+  font-size:2em;
+  opacity:0;
+}*/
+
+/*#eventTable.left {
+  left:8%;
+}
+
+#iconBack {
+  position:absolute;
+  z-index:-1;
+  top:9%;
+  left:0%;
+  color:black;
+  cursor:pointer;
+  opacity:0;
+}
+
+#eventTable table {
+  font-size:0.8em;
+}
+
+#eventTable th {
+  padding:1em;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+#eventTable td {
+  padding-bottom:0;
+  padding-left:1em;
+  padding-right:1em;
+  text-align:center;
+}*/

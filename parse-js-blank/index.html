@@ -18,55 +18,13 @@
 <script src="js/jquery.scrollmagic.min.js"></script>
 <script src="js/jquery.scrollmagic.debug.js"></script>
 <script type="text/javascript">
-    function changeImage(element,objectIdNeeded,boolNow) {
-        element.src = element.bln ? "assets/tick.png" : "assets/cross.png";
-        element.bln = !element.bln;  /* assigns opposite boolean value always */
-
-        console.log(objectIdNeeded);
-        var TestObject = Parse.Object.extend("items");
-
-        var query = new Parse.Query(TestObject);
-        query.equalTo("objectId", objectIdNeeded);
-        console.log(objectIdNeeded);
-        query.first({
-            success: function (TestObject) {
-                TestObject.save(null, {
-                    success: function (testRow) {
-
-                       // contact.set("FirstName", NewFname.value);
-                       // contact.set("LastName", NewLname.value);
-                        testRow.set("status") = !boolNow;
-
-                        testRow.save();
-                        //location.reload();
-                    }
-                });
-
-            }
-        });
-
-                    
-
-        // Parse.initialize("e9xwauybyOdn6Bv4WvDoVvubHW2I6doSzV7Cd9wa", "r0IwC7zAiETyKHUmMRi8wGxyqkd3lNilUuTSnkSq");
-
-        // var TestObject = Parse.Object.extend("items");
-        // var testObject = new TestObject();
-        // console.log("rowToBeUpdated");
-    
-        // testObject.save(null, {
-        //     success: function(testObject) {
-        // // Now let's update it with some new data. In this case, only cheatMode and score
-        // // will get sent to the cloud. playerName hasn't changed.
-        //     testObject.set("name") = rowToBeUpdated.get("name");
-        //     testObject.set("status") = !rowToBeUpdated.get("status");
-        //     testObject.save();
-        // }
-        // });
-    }
- </script>
+    function changeImage(element) {
+         element.src = element.bln ? "assets/tick.png" : "assets/cross.png";
+         element.bln = !element.bln;  /* assigns opposite boolean value always */
+   }
+//  </script>
 <link rel="stylesheet" href="js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
   <div id="main">
   <div class="success">
         <!-- <code>
@@ -95,6 +53,8 @@
 
     var query = new Parse.Query(TestObject);
 
+   // var dfd = new jQuery.Deferred();
+
     query.find({
       success: function(results) {
         //alert("Successfully retrieved " + results.length + " scores.");
@@ -121,28 +81,25 @@
                     else{
                         var address = "Your "+results[i].get("name")+" is in the middle of nowhere! :("
                     }
+                    function changeImage(element) {
+                        element.src = element.bln ? "assets/tick.png" : "assets/cross.png";
+                        element.bln = !element.bln;
+                    }
                     
                     //console.log(address);
-                    var myRow="<tr><td><a class=\"fancybox\" data-fancybox-type=\"iframe\" href=\"/demo/iframe.html\">"+results[i].get("name")+"</a></td><td><img src="+imageToDisplay+" id=\"changer\" onclick=\"changeImage(this,"+results[i].get("objectId")+","+results[i].get("status")+")\" /></td><td>"+address+"</td>";
+                var myRow="<tr><td><a class=\"fancybox\" data-fancybox-type=\"iframe\" href=\"/demo/iframe.html\">"+results[i].get("name")+"</a></td><td><img src="+imageToDisplay+" id=\"changer\" onclick=\"changeImage(this)\" /></td><td><a href=\"https://www.google.com/maps/search/"+iskiLocation.latitude+","+iskiLocation.longitude+"/\">"+address+"</a></td>";
                     //console.log(myRow);
-                    $("#eventTable tr:last").after(myRow);},
+                    
+                    $("#eventTable tr:last").after(myRow);
+                    //console.log(changer);
+                    // changer.onclick = function() {
+                    //     console.log("Click action done!");
+                    // }
+
+                },
                 data: {},
                 async: false
             });
-
-            // $.getJSON("http://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838", function(e){
-            //     console.log(e);
-            //     var address = e.results[0].formatted_address;
-            //     console.log(address);
-            //     var myRow="<tr><td><a class=\"fancybox\" data-fancybox-type=\"iframe\" href=\"/demo/iframe.html\">"+results[i].get("name")+"</a></td><td><img src="+imageToDisplay+" id=\"changer\" onclick=\"changeImage(this)\" /></td><td>"+s+"</td>";
-            //     console.log(myRow);
-            //     $("#eventTable tr:last").after(myRow);
-
-            // })
-
-            //Display the received items in a table 
-            
-
         }
       },
       error: function(error) {
