@@ -80,3 +80,18 @@ a{
     font-size: 18pt;
     color: #fff;
 }
+#login img{
+	border-radius: 100%;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+}
+#login .user_name{
+	vertical-align: middle;
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 13pt;
+}
+#logout{
+	font-size: 14pt;
+}
