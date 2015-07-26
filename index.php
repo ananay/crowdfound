@@ -7,17 +7,9 @@
 	<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-	<div class="header">
-		<h1>Crowdfound</h1>
-		<ul>
-			<li><a href="login.php">Login</a></li>
-		</ul>
-	</div>
+	<span class="login">Login</span>
 	<div class="panel1">
 		<h1 class="title">Crowdfound</h1>
-	</div>
-	<div class="panel2">
-		
 	</div>
 </body>
 </html>
