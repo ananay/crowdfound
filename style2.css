@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,300');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+*{
+	margin:0;
+	padding:0;
+}
+.header{
+	width: 100%;
+	background: #2980b9;
+	color:#000;
+	font-family: "Raleway";
+	font-weight: 100;
+	padding:20px;
+	position: fixed;
+	/*z-index: +2;*/
+}
+.header h1{
+	color: #fff;
+    font-size: 20pt;
+    margin-top: 15px;
+    display: inline-block;
+}
+.header ul{
+	display: inline-block;
+    vertical-align: baseline;
+    position: relative;
+    top: -3px;
+    float: right;
+    left: -5%;
+}
+.header ul li{
+	list-style: none;
+    display: inline-block;
+    color: #fff;
+    padding: 6px;
+    font-size: 15pt;
+    font-weight: 600;
+}
+#login img{
+	border-radius: 100%;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+}
+#login .user_name{
+	vertical-align: middle;
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 13pt;
+}
+#logout{
+	font-size: 12pt;
+	color:#fff;
+	text-decoration: none;
+}
+.out{
+	position: absolute;
+    top: 50%;
+    z-index: -1;
+    left: 50%;
+    margin-top: 6%;
+    transform: translate(-50%,-50%);
+    font-family: "Roboto";
+    border-bottom: 1px solid #333;
+}
+/*.out *{
+	font-family: "Open Sans";
+}
+.out td{
+	padding: 10px;
+}
+.out tr td a{
+	text-decoration: none;
+    color: #000;
+    font-size: 15pt;
+}
+.out tr:nth-of-type(even){
+	background: #333;
+}
+.out tr:nth-of-type(even) *{
+	color:#fff;
+}*/
+.out td{
+ 	padding-bottom: 13px;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+}
+.out a{
+	text-decoration: none;
+	color:#333;
+}
+.out tr{
+ 		transition: all ease 0.2s;
+ 		transition: width 2s;
+}
+
+.out tr:hover{
+ 		background: url(gp.png);
+ 		border:2px solid url(gp.png);
+ 		transition: width 2s;
+}
+td{
+		padding-left: 30px;
+}
+#changer{
+	position: relative;
+    width: 30px;
+    top: 10px;
+}

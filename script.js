@@ -25,7 +25,7 @@ $(document).ready(function(){
 		});
 		$("#login").click(function(){
 			if (authData){
-				window.location.href="parse-js-blank/index.html";
+				window.location.href="dashboard.php";
 			} else {
 				srv.authWithOAuthPopup("twitter", function(error, data){
 					if (error){
